@@ -19,5 +19,22 @@ module RailsCi
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+		config.generators do |g|
+			g.test_framework :rspec,
+			  # true はモデルごとにフィクスチャを作成することを指定します(本当のフィクスチャの 代わりに Factory Girl のファクトリを使います) 。
+		    fixtures: true,
+				# false はビュースペックを作成しないことを指定します。
+			  view_specs: false,
+				# false はヘルパーファイル用のスペックを作成しないことを指定します。
+			  helper_specs: false,
+				# false は config/routes.rb 用のスペックファイルの作成を省略します。
+			  routing_specs: false,
+			  controller_specs: true,
+				# false を指定するとRSpecがデフォルトで追加する統合テストレベルのスペックをspec/requestsに追加しなくなります。
+			  request_specs: false
+			# フィクスチャの代わりにファクトリを作成し、spec/factories ディレクトリにファクトリを保存することを指定しています。
+			g.fixture_replacement :factory_girl, dir: "spec/factories"
+	  end
   end
 end

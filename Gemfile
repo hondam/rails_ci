@@ -3,8 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
-# Use sqlite3 as the database for Active Record
-#gem 'sqlite3'
+# Use Postgres as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -39,10 +38,40 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-group :development, :test do
-  gem 'dotenv-rails'
-end
-
 group :production do
   gem 'thin'
+end
+
+group :development, :test do
+	# 
+	# Edit RAILS_ROOT/.env
+  gem 'dotenv-rails'
+
+	# 
+	gem 'foreman'
+
+	# RSpecを含んでいるgemです。このgemはRails専用の機能を追加するRSpecのラッパーライブラリになっています
+	gem 'rspec-rails'
+
+	# Railsがデフォルトで提供するフィクスチャをずっと便利なファクトリで置き換えます。
+	# フィクスチャやファクトリはテストスイート用のテストデータを作成するために使われます。
+	gem 'factory_girl_rails'
+end
+
+group :test do
+	# 名前やメールアドレス、その他のプレースホルダをファクトリに提供します。
+  gem 'faker'
+
+	# ユーザとWebアプリケーションの対話をプログラム上で簡単にシミュレートできるようにします。 
+	gem 'capybara'
+
+	# まっさらな状態で各specが実行できるように、テストデータベースのデータを掃除します。 
+	gem 'database_cleaner'
+
+	# あなたの好きなタイミングでデフォルトのwebブラウザを開き、アプリケーションの表示内容を見せることです。
+	# テストをデバッグするときには大変便利です。
+	gem 'launchy'
+
+	# Capybaraを使ってJavaScriptベースの対話処理をテスト可能にします。
+	gem 'selenium-webdriver'
 end
